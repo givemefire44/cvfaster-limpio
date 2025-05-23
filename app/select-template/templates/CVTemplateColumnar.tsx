@@ -5,7 +5,7 @@ type Props = {
 };
 
 export default function CVTemplateColumnar({ data }: Props) {
-  const { personal, experience, education, skills, profile } = data;
+  const { personal, experience, education, skills } = data; // <-- SACÁ profile de acá
   return (
     <div
       className="w-full font-sans"
@@ -71,7 +71,7 @@ export default function CVTemplateColumnar({ data }: Props) {
           <div className="mb-3">
             <div className="font-bold text-lg mb-1">Profile</div>
             <div className="text-base mb-4">
-              {profile || "Escribe una breve descripción profesional."}
+              {personal.profile || "Escribe una breve descripción profesional."}
             </div>
           </div>
           {/* Experiencia */}
