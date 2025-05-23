@@ -3,8 +3,10 @@ import { useEffect, useState, useRef } from "react";
 import { useCvForm } from "../create-cv/state";
 import { useRouter } from "next/navigation"; // <-- AGREGADO
 
+
 import CVTemplateBase from "./templates/CVTemplateBase";
 import CVTemplateModern from "./templates/CVTemplateModern"; // <-- NUEVO
+import CVTemplateColumnar from "./templates/CVTemplateColumnar";
 // Si querés más templates, importalos aquí
 
 const templates = [
@@ -16,7 +18,10 @@ const templates = [
     name: "Moderno",
     component: CVTemplateModern,
   },
-
+{ 
+  name: "Columnar", 
+  component: CVTemplateColumnar
+},
   // { name: "OtroTemplate", component: OtroTemplate },
 ];
 
