@@ -6,10 +6,11 @@ export type PersonalDetails = {
   lastName: string;
   email: string;
   address: string;
-  city: string;        // <-- AGREGADO
+  city: string;
   phone: string;
   country: string;
   desiredPosition: string;
+  profileImage?: string; // <-- AGREGADO
 };
 
 export type Experience = {
@@ -18,7 +19,7 @@ export type Experience = {
   startDate: string;
   endDate: string;
   description: string;
-  city: string;        // <-- AGREGADO
+  city: string;
 };
 
 export type Education = {
@@ -27,7 +28,7 @@ export type Education = {
   startDate: string;
   endDate: string;
   description: string;
-  city: string;        // <-- AGREGADO
+  city: string;
 };
 
 export type Skill = {
@@ -50,10 +51,11 @@ const initialFormData: CvFormData = {
     lastName: "",
     email: "",
     address: "",
-    city: "",        // <-- AGREGADO
+    city: "",
     phone: "",
     country: "",
     desiredPosition: "",
+    profileImage: "", // <-- AGREGADO
   },
   experience: [],
   education: [],
