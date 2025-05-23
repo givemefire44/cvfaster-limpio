@@ -1,8 +1,8 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { useCvForm } from "../create-cv/state";
+import { useRouter } from "next/navigation"; // <-- AGREGADO
 
-// Importa el template base
 import CVTemplateBase from "./templates/CVTemplateBase";
 // Si querés más templates, importalos aquí
 
@@ -11,13 +11,14 @@ const templates = [
     name: "Base",
     component: CVTemplateBase,
   },
-  // { name: "OtroTemplate", component: OtroTemplate }, // Agregá más acá
+  // { name: "OtroTemplate", component: OtroTemplate },
 ];
 
 export default function SelectTemplatePage() {
   const { formData } = useCvForm();
   const [selectedTemplate, setSelectedTemplate] = useState(0);
   const previewRef = useRef<HTMLDivElement | null>(null);
+  const router = useRouter(); // <-- AGREGADO
 
   // Descarga PDF usando html2canvas + jsPDF
   const handleDownload = async () => {
@@ -68,13 +69,22 @@ export default function SelectTemplatePage() {
       </aside>
       {/* Preview grande del template */}
       <section className="flex-1 flex flex-col items-center justify-start p-12">
-        <div className="w-full flex justify-end mb-6">
+        <div className="w-full flex justify-between mb-6">
+          {/* Botón VOLVER AL EDITOR */}
+          <button
+            className="bg-gray-200 text-gray-800 px-6 py-2 rounded font-semibold shadow hover:bg-gray-300 transition"
+            onClick={() => router.push("/create-cv")} // <-- AQUÍ AJUSTA la ruta si tu editor está en otro path
+            type="button"
+          >
+            Volver al editor
+          </button>
+          {/* Botón Descargar PDF */}
           <button
             className="bg-blue-600 text-white px-6 py-2 rounded font-semibold shadow"
             onClick={handleDownload}
             type="button"
           >
-            Download PDF
+            Descargar PDF
           </button>
         </div>
         <div
