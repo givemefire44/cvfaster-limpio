@@ -22,6 +22,16 @@ export default function SelectTemplatePage() {
   // Descarga PDF usando html2canvas + jsPDF
   const handleDownload = async () => {
     if (!previewRef.current) return;
+
+    // Esperar a que todas las imágenes del preview se carguen
+    const images = previewRef.current.querySelectorAll("img");
+    await Promise.all(Array.from(images).map(img => {
+      if (img.complete) return Promise.resolve();
+      return new Promise(res => {
+        img.onload = img.onerror = res;
+      });
+    }));
+
     const html2canvasMod = (await import("html2canvas")).default;
     const jsPDFMod = (await import("jspdf")).default;
     const canvas = await html2canvasMod(previewRef.current, { scale: 2 });
