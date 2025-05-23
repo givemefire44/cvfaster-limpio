@@ -4,6 +4,7 @@ import { useCvForm } from "../create-cv/state";
 import { useRouter } from "next/navigation"; // <-- AGREGADO
 
 import CVTemplateBase from "./templates/CVTemplateBase";
+import CVTemplateModern from "./templates/CVTemplateModern"; // <-- NUEVO
 // Si querés más templates, importalos aquí
 
 const templates = [
