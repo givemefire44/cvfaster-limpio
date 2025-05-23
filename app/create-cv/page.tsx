@@ -6,12 +6,13 @@ import ExperienceForm from "./components/ExperienceForm";
 import EducationForm from "./components/EducationForm";
 import SkillsForm from "./components/SkillsForm";
 import CVPreview from "./components/CVPreview";
+import { useRouter } from "next/navigation";
 
 export default function CreateCVPage() {
   const { formData, setFormData, isHydrated } = useCvForm();
   const [step, setStep] = useState(1);
+  const router = useRouter();
 
-  // 🛡️ Migración defensiva para skills sin level (por datos viejos)
   useEffect(() => {
     if (
       isHydrated &&
@@ -27,9 +28,7 @@ export default function CreateCVPage() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isHydrated]);
 
-  // --- FILTRO educación vacía al avanzar desde el paso Educación ---
   const goNext = () => {
-    // Si estoy en Educación (paso 3), filtro educación antes de avanzar
     if (step === 3) {
       const cleanEducation = formData.education.filter(
         edu =>
@@ -40,7 +39,6 @@ export default function CreateCVPage() {
           edu.endDate ||
           edu.description
       );
-      // Solo actualiza si cambió algo (opcional)
       if (cleanEducation.length !== formData.education.length) {
         setFormData({ ...formData, education: cleanEducation });
       }
@@ -171,7 +169,16 @@ export default function CreateCVPage() {
           {formStep}
         </div>
       </section>
-      <section className="w-full md:w-1/2 flex justify-center items-start p-6">
+      <section className="w-full md:w-1/2 flex flex-col justify-start items-start p-6">
+        <div className="w-full flex justify-end mb-2">
+          <button
+            className="bg-blue-600 text-white px-6 py-2 rounded font-semibold shadow"
+            onClick={() => router.push("/select-template")}
+            type="button"
+          >
+            Descargar PDF
+          </button>
+        </div>
         <div className="bg-white rounded-xl shadow-lg w-full max-w-[700px] min-h-[90vh] flex flex-col overflow-hidden">
           <CVPreview data={formData} />
         </div>
