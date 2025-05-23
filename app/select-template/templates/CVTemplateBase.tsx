@@ -9,20 +9,29 @@ export default function CVTemplateBase({ data }: Props) {
   return (
     <div className="w-full">
       {/* Header */}
-      <div className="bg-green-300 p-4 rounded-t-lg mb-4 min-h-[60px]">
-        <div className="font-bold text-2xl mb-1">{personal.firstName} {personal.lastName}</div>
-        <div className="text-sm text-gray-800 mb-1">
+      <div className="bg-green-300 p-4 rounded-t-lg mb-4 min-h-[60px] flex flex-col items-center">
+        {/* Imagen de perfil */}
+        {personal.profileImage && (
+          <img
+            src={personal.profileImage}
+            alt="Foto de perfil"
+            className="w-28 h-28 rounded-full object-cover mb-2 border-4 border-white shadow"
+            style={{ marginTop: -60 }}
+          />
+        )}
+        <div className="font-bold text-2xl mb-1 text-center">{personal.firstName} {personal.lastName}</div>
+        <div className="text-sm text-gray-800 mb-1 text-center">
           {personal.address}
           {personal.address && ', '}
           {personal.city}
           {personal.city && ', '}
           {personal.country}
         </div>
-        <div className="text-sm text-gray-800 mb-1">
+        <div className="text-sm text-gray-800 mb-1 text-center">
           {personal.phone && <span>{personal.phone} · </span>}
           {personal.email && <span>{personal.email}</span>}
         </div>
-        <div className="text-sm text-gray-800">
+        <div className="text-sm text-gray-800 text-center">
           {personal.desiredPosition}
         </div>
       </div>
