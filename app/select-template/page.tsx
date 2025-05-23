@@ -12,6 +12,11 @@ const templates = [
     name: "Base",
     component: CVTemplateBase,
   },
+  {
+    name: "Moderno",
+    component: CVTemplateModern,
+  },
+];
   // { name: "OtroTemplate", component: OtroTemplate },
 ];
 
