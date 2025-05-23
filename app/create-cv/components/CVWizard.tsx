@@ -1,4 +1,5 @@
 import { CvFormData } from "../state";
+import React from "react";
 
 type Props = {
   formData: CvFormData;
@@ -18,8 +19,25 @@ export default function CVWizard({ formData, setFormData, onNext }: Props) {
     });
   };
 
-  // Para compatibilidad con el tipo (según tu CvFormData/personal)
-  const { desiredPosition, firstName, lastName, email, phone, address, city, country } = formData.personal;
+  // Manejar la subida de imagen
+  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const reader = new FileReader();
+      reader.onloadend = () => {
+        setFormData({
+          ...formData,
+          personal: {
+            ...formData.personal,
+            profileImage: reader.result as string,
+          },
+        });
+      };
+      reader.readAsDataURL(file);
+    }
+  };
+
+  const { desiredPosition, firstName, lastName, email, phone, address, city, country, profileImage } = formData.personal;
 
   return (
     <form className="p-8 h-full flex flex-col">
@@ -108,6 +126,24 @@ export default function CVWizard({ formData, setFormData, onNext }: Props) {
           />
         </div>
       </div>
+
+      {/* Subir imagen */}
+      <div className="mb-6">
+        <label className="block font-semibold mb-1">Foto de perfil</label>
+        <input
+          type="file"
+          accept="image/*"
+          onChange={handleImageChange}
+        />
+        {profileImage && (
+          <img
+            src={profileImage}
+            alt="Vista previa"
+            style={{ width: 100, height: 100, objectFit: "cover", borderRadius: 8, marginTop: 8 }}
+          />
+        )}
+      </div>
+
       <div className="flex justify-end mt-8">
         <button
           className="bg-blue-600 text-white px-4 py-2 rounded"
