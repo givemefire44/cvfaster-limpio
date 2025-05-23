@@ -10,7 +10,8 @@ export type PersonalDetails = {
   phone: string;
   country: string;
   desiredPosition: string;
-  profileImage?: string; // <-- AGREGADO
+  profileImage?: string;
+  profile?: string; // <-- AGREGADO AQUÍ
 };
 
 export type Experience = {
@@ -55,7 +56,8 @@ const initialFormData: CvFormData = {
     phone: "",
     country: "",
     desiredPosition: "",
-    profileImage: "", // <-- AGREGADO
+    profileImage: "",
+    profile: "", // <-- AGREGADO AQUÍ TAMBIÉN
   },
   experience: [],
   education: [],
