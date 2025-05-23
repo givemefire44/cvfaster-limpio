@@ -19,23 +19,33 @@ export default function CVPreview({ data }: Props) {
   return (
     <div className="p-10 flex flex-col h-full">
       {/* Banner superior con datos personales */}
-      <div className="bg-green-100 p-4 rounded-t-lg mb-4 min-h-[60px]">
-        <div className="font-bold text-xl mb-1">
-          {personal.firstName} {personal.lastName}
-        </div>
-        <div className="text-sm text-gray-700 mb-1">
-          {personal.address}
-          {personal.address && ', '}
-          {personal.city}
-          {personal.city && ', '}
-          {personal.country}
-        </div>
-        <div className="text-sm text-gray-700 mb-1">
-          {personal.phone && <span>{personal.phone} · </span>}
-          {personal.email && <span>{personal.email}</span>}
-        </div>
-        <div className="text-sm text-gray-700">
-          {personal.desiredPosition}
+      <div className="bg-green-100 p-4 rounded-t-lg mb-4 min-h-[60px] flex items-center gap-4">
+        {/* Imagen de perfil */}
+        {personal.profileImage && (
+          <img
+            src={personal.profileImage}
+            alt="Foto de perfil"
+            style={{ width: 80, height: 80, objectFit: "cover", borderRadius: "50%" }}
+          />
+        )}
+        <div>
+          <div className="font-bold text-xl mb-1">
+            {personal.firstName} {personal.lastName}
+          </div>
+          <div className="text-sm text-gray-700 mb-1">
+            {personal.address}
+            {personal.address && ', '}
+            {personal.city}
+            {personal.city && ', '}
+            {personal.country}
+          </div>
+          <div className="text-sm text-gray-700 mb-1">
+            {personal.phone && <span>{personal.phone} · </span>}
+            {personal.email && <span>{personal.email}</span>}
+          </div>
+          <div className="text-sm text-gray-700">
+            {personal.desiredPosition}
+          </div>
         </div>
       </div>
 
