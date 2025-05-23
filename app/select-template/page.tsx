@@ -1,11 +1,10 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { useCvForm } from "../create-cv/state";
-import { useRouter } from "next/navigation"; // <-- AGREGADO
-
+import { useRouter } from "next/navigation";
 
 import CVTemplateBase from "./templates/CVTemplateBase";
-import CVTemplateModern from "./templates/CVTemplateModern"; // <-- NUEVO
+import CVTemplateModern from "./templates/CVTemplateModern";
 import CVTemplateColumnar from "./templates/CVTemplateColumnar";
 // Si querés más templates, importalos aquí
 
@@ -18,10 +17,10 @@ const templates = [
     name: "Moderno",
     component: CVTemplateModern,
   },
-{ 
-  name: "Columnar", 
-  component: CVTemplateColumnar
-},
+  {
+    name: "Columnar",
+    component: CVTemplateColumnar,
+  },
   // { name: "OtroTemplate", component: OtroTemplate },
 ];
 
@@ -29,7 +28,7 @@ export default function SelectTemplatePage() {
   const { formData } = useCvForm();
   const [selectedTemplate, setSelectedTemplate] = useState(0);
   const previewRef = useRef<HTMLDivElement | null>(null);
-  const router = useRouter(); // <-- AGREGADO
+  const router = useRouter();
 
   // Descarga PDF usando html2canvas + jsPDF
   const handleDownload = async () => {
@@ -58,15 +57,15 @@ export default function SelectTemplatePage() {
   const TemplateComponent = templates[selectedTemplate].component;
 
   return (
-    <main className="min-h-screen bg-gray-900 flex flex-row items-start">
-      {/* Galería de templates */}
-      <aside className="w-64 bg-gray-800 p-6 min-h-screen text-white">
+    <main className="min-h-screen bg-gray-900 flex flex-col sm:flex-row items-start">
+      {/* Sidebar DESKTOP */}
+      <aside className="hidden sm:flex w-64 bg-gray-800 p-6 min-h-screen text-white flex-col">
         <div className="mb-4 font-bold text-lg">Templates</div>
         <div className="flex flex-col gap-4">
           {templates.map((tpl, idx) => (
             <button
               key={tpl.name}
-              className={`rounded border p-2 text-left ${
+              className={`rounded border p-2 text-left transition ${
                 idx === selectedTemplate
                   ? "border-blue-400 bg-blue-900"
                   : "border-gray-600 bg-gray-700"
@@ -78,31 +77,47 @@ export default function SelectTemplatePage() {
           ))}
         </div>
       </aside>
+      {/* Tabs MOBILE */}
+      <div className="flex sm:hidden w-full bg-gray-800 p-2 gap-2 sticky top-0 z-10">
+        {templates.map((tpl, idx) => (
+          <button
+            key={tpl.name}
+            className={`flex-1 rounded p-2 text-sm transition ${
+              idx === selectedTemplate
+                ? "bg-blue-600 text-white"
+                : "bg-gray-700 text-gray-200"
+            }`}
+            onClick={() => setSelectedTemplate(idx)}
+          >
+            {tpl.name}
+          </button>
+        ))}
+      </div>
       {/* Preview grande del template */}
-      <section className="flex-1 flex flex-col items-center justify-start p-12">
-        <div className="w-full flex justify-between mb-6">
-          {/* Botón VOLVER AL EDITOR */}
-          <button
-            className="bg-gray-200 text-gray-800 px-6 py-2 rounded font-semibold shadow hover:bg-gray-300 transition"
-            onClick={() => router.push("/create-cv")} // <-- AQUÍ AJUSTA la ruta si tu editor está en otro path
-            type="button"
+      <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-12 w-full">
+        <div className="w-full max-w-3xl flex flex-col gap-4">
+          <div className="flex flex-row justify-between mb-2 px-4 sm:px-0 pt-4 sm:pt-0">
+            <button
+              className="bg-gray-200 text-gray-800 px-4 py-2 rounded font-semibold shadow hover:bg-gray-300 transition"
+              onClick={() => router.push("/create-cv")}
+              type="button"
+            >
+              Volver al editor
+            </button>
+            <button
+              className="bg-blue-600 text-white px-4 py-2 rounded font-semibold shadow"
+              onClick={handleDownload}
+              type="button"
+            >
+              Descargar PDF
+            </button>
+          </div>
+          <div
+            className="bg-white rounded-lg shadow-xl p-2 sm:p-8 w-full sm:w-[650px] min-h-[600px] sm:min-h-[900px] flex flex-col items-center"
+            ref={previewRef}
           >
-            Volver al editor
-          </button>
-          {/* Botón Descargar PDF */}
-          <button
-            className="bg-blue-600 text-white px-6 py-2 rounded font-semibold shadow"
-            onClick={handleDownload}
-            type="button"
-          >
-            Descargar PDF
-          </button>
-        </div>
-        <div
-          className="bg-white rounded-lg shadow-xl p-8 w-[650px] min-h-[900px] flex flex-col items-center"
-          ref={previewRef}
-        >
-          <TemplateComponent data={formData} />
+            <TemplateComponent data={formData} />
+          </div>
         </div>
       </section>
     </main>
