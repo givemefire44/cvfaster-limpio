@@ -1,15 +1,10 @@
 "use client";
 import { useEffect, useState, useRef } from "react";
 import { useCvForm } from "../create-cv/state";
-import dynamic from "next/dynamic";
 
 // Importa el template base
 import CVTemplateBase from "./templates/CVTemplateBase";
 // Si querés más templates, importalos aquí
-
-// Importar dinámicamente jsPDF y html2canvas para evitar problemas SSR
-const jsPDF = dynamic(() => import("jspdf"), { ssr: false });
-const html2canvas = dynamic(() => import("html2canvas"), { ssr: false });
 
 const templates = [
   {
