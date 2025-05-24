@@ -6,7 +6,8 @@ type Props = {
 };
 
 export default function CVTemplateBarcelona({ data }: Props) {
-  const { personal, experience, education, skills, languages, tools, about, other } = data;
+  // Solo los que existen en CvFormData:
+  const { personal, experience, education, skills, languages } = data;
 
   return (
     <div className="bg-gray-100 p-6 flex justify-center min-h-screen">
@@ -44,32 +45,12 @@ export default function CVTemplateBarcelona({ data }: Props) {
           </section>
 
           {/* Información */}
-          <section>
-            <h3 className="font-semibold text-blue-200 mb-2 flex items-center gap-2"><FaInfoCircle /> Información</h3>
-            <ul className="text-sm space-y-2">
-              {other?.driversLicense && (
-                <li className="flex items-center gap-2"><FaCar /> Carnet de conducir</li>
-              )}
-              {other?.ownCar && (
-                <li className="flex items-center gap-2"><FaCar /> Vehículo propio</li>
-              )}
-              {other?.availabilityToTravel && (
-                <li className="flex items-center gap-2"><FaPlane /> Disponibilidad para viajar</li>
-              )}
-            </ul>
-          </section>
+          {/* Si tienes 'other' en tu tipo, repón esta sección. 
+              Si no, puedes comentarla o eliminarla para evitar más errores */}
 
           {/* Herramientas */}
-          {tools && tools.length > 0 && (
-            <section>
-              <h3 className="font-semibold text-blue-200 mb-2 flex items-center gap-2"><FaTools /> Herramientas</h3>
-              <ul className="text-sm space-y-1">
-                {tools.map((tool: any, i: number) => (
-                  <li key={i}>{tool.name}</li>
-                ))}
-              </ul>
-            </section>
-          )}
+          {/* Si tienes 'tools' en tu tipo, repón esta sección.
+              Si no, puedes comentarla o eliminarla */}
 
           {/* Idiomas */}
           {languages && languages.length > 0 && (
@@ -77,7 +58,7 @@ export default function CVTemplateBarcelona({ data }: Props) {
               <h3 className="font-semibold text-blue-200 mb-2 flex items-center gap-2"><FaGlobe /> Idiomas</h3>
               <ul className="text-sm space-y-1">
                 {languages.map((lang: any, i: number) => (
-                  <li key={i}>{lang.language} <span className="text-xs text-blue-100">({lang.level})</span></li>
+                  <li key={i}>{lang.name} <span className="text-xs text-blue-100">({lang.level})</span></li>
                 ))}
               </ul>
             </section>
@@ -87,12 +68,8 @@ export default function CVTemplateBarcelona({ data }: Props) {
         {/* Columna Principal */}
         <main className="flex-1 flex flex-col p-8 gap-8">
           {/* Sobre Mí */}
-          {about && (
-            <section>
-              <h2 className="font-bold text-xl text-blue-900 mb-2">Perfil Profesional</h2>
-              <p className="text-gray-800">{about}</p>
-            </section>
-          )}
+          {/* Si tienes 'about' en tu tipo, repón esta sección.
+              Si no, puedes comentarla o eliminarla */}
 
           {/* Experiencia Laboral */}
           <section>
