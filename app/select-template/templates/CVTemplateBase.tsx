@@ -7,7 +7,7 @@ type Props = {
 export default function CVTemplateBase({ data }: Props) {
   const { personal, experience, education, skills } = data;
   return (
-    <div className="w-full">
+    <div className="w-full max-w-3xl bg-white rounded-xl shadow mx-auto p-8">
       {/* Header: imagen a la izquierda, datos a la derecha */}
       <div className="bg-green-100 p-4 rounded-t-lg mb-4 min-h-[110px] flex items-center gap-4">
         {personal.profileImage && (
