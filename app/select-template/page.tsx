@@ -6,14 +6,14 @@ import { useRouter } from "next/navigation";
 import CVTemplateBase from "./templates/CVTemplateBase";
 import CVTemplateModern from "./templates/CVTemplateModern";
 import CVTemplateColumnar from "./templates/CVTemplateColumnar";
-import CVTemplateColumnar from "./CVTemplateBarcelona";
+import CVTemplateBarcelona from "./CVTemplateBarcelona";
 // Si querés más templates, importalos aquí
 
 const templates = [
   { name: "Base", component: CVTemplateBase },
   { name: "Moderno", component: CVTemplateModern },
   { name: "Columnar", component: CVTemplateColumnar },
-  { name: "Columnar", component: CVTemplateBarcelona },
+  { name: "Barcelona", component: CVTemplateBarcelona },
 ];
 
 export default function SelectTemplatePage() {
