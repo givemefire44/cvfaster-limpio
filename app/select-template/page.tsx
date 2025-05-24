@@ -95,16 +95,16 @@ export default function SelectTemplatePage() {
         Descargar PDF
       </button>
 
-      {/* Preview grande del template */}
+         {/* Preview grande del template */}
       <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full">
         <div className="w-full max-w-3xl flex flex-col gap-2">
-          {/* Tarjeta principal */}
+          {/* Tarjeta principal con botones adentro */}
           <div
             className="bg-white rounded-lg shadow-xl p-2 sm:p-8 w-full sm:w-[650px] min-h-[600px] sm:min-h-[900px] flex flex-col items-center relative"
             ref={previewRef}
           >
-            {/* Botón "Volver al editor" dentro de la hoja, arriba izquierda */}
-            <div className="w-full flex flex-row justify-start items-start absolute left-0 top-0 px-4 pt-4 z-10">
+            {/* Botones dentro de la tarjeta, alineados arriba izquierda y derecha */}
+            <div className="w-full flex flex-row justify-between items-start absolute left-0 top-0 px-4 pt-4 z-10">
               <button
                 className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
                 onClick={() => router.push("/create-cv")}
@@ -112,6 +112,14 @@ export default function SelectTemplatePage() {
                 style={{ height: "28px" }}
               >
                 Volver al editor
+              </button>
+              <button
+                className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
+                onClick={handleDownload}
+                type="button"
+                style={{ height: "28px" }}
+              >
+                Descargar PDF
               </button>
             </div>
             {/* Espacio para no tapar el contenido */}
