@@ -37,12 +37,18 @@ export type Skill = {
   level: string; // e.g. "Básico", "Intermedio", "Avanzado"
 };
 
+export type Language = {
+  name: string;
+  level: string; // e.g. "Básico", "Intermedio", "Avanzado", etc.
+};
+
 // Estado global del CV
 export type CvFormData = {
   personal: PersonalDetails;
   experience: Experience[];
   education: Education[];
   skills: Skill[];
+  languages: Language[]; // <-- AGREGADO AQUÍ
 };
 
 // Estado inicial completo
@@ -62,6 +68,7 @@ const initialFormData: CvFormData = {
   experience: [],
   education: [],
   skills: [],
+  languages: [], // <-- AGREGADO AQUÍ TAMBIÉN
 };
 
 const LOCAL_STORAGE_KEY = "cv-form-data";
