@@ -1,6 +1,3 @@
-import { useState, useEffect } from "react";
-
-// Tipos para cada sección
 export type PersonalDetails = {
   firstName: string;
   lastName: string;
@@ -11,7 +8,7 @@ export type PersonalDetails = {
   country: string;
   desiredPosition: string;
   profileImage?: string;
-  profile?: string; // <-- AGREGADO AQUÍ
+  profile?: string;
 };
 
 export type Experience = {
@@ -34,19 +31,27 @@ export type Education = {
 
 export type Skill = {
   name: string;
-  level: string; // e.g. "Básico", "Intermedio", "Avanzado"
+  level: string;
 };
 
-// Estado global del CV
+export type Language = {
+  name: string;
+  level: string;
+};
+
 export type CvFormData = {
   personal: PersonalDetails;
   experience: Experience[];
   education: Education[];
   skills: Skill[];
+  languages: Language[]; // <-- DEBE ESTAR AQUÍ
+  // Si quieres usar tools, about, other, agrégalos aquí también:
+  // tools?: { name: string }[];
+  // about?: string;
+  // other?: { [key: string]: any };
 };
 
-// Estado inicial completo
-const initialFormData: CvFormData = {
+export const initialFormData: CvFormData = {
   personal: {
     firstName: "",
     lastName: "",
@@ -57,40 +62,14 @@ const initialFormData: CvFormData = {
     country: "",
     desiredPosition: "",
     profileImage: "",
-    profile: "", // <-- AGREGADO AQUÍ TAMBIÉN
+    profile: "",
   },
   experience: [],
   education: [],
   skills: [],
+  languages: [], // <-- DEBE ESTAR AQUÍ TAMBIÉN
+  // tools: [],
+  // about: "",
+  // other: {},
 };
-
-const LOCAL_STORAGE_KEY = "cv-form-data";
-
-export function useCvForm() {
-  // 1. Estado inicial siempre vacío (igual que el server)
-  const [formData, setFormData] = useState<CvFormData>(initialFormData);
-  const [isHydrated, setIsHydrated] = useState(false);
-
-  // 2. Cuando montó en el cliente, leo localStorage y actualizo estado
-  useEffect(() => {
-    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
-    if (stored) {
-      setFormData(JSON.parse(stored));
-    }
-    setIsHydrated(true);
-  }, []);
-
-  // 3. Cada vez que cambia el estado, lo guardo en localStorage
-  useEffect(() => {
-    if (isHydrated) {
-      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
-    }
-  }, [formData, isHydrated]);
-
-  return {
-    formData,
-    setFormData,
-    isHydrated,
-  };
-}
 
