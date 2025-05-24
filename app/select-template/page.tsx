@@ -42,7 +42,7 @@ export default function SelectTemplatePage() {
   const TemplateComponent = templates[selectedTemplate].component;
 
   return (
-    <main className="min-h-screen bg-gray-900 flex flex-col sm:flex-row items-start relative">
+    <main className="min-h-screen bg-gray-900 flex flex-col sm:flex-row items-start">
       {/* Sidebar DESKTOP */}
       <aside className="hidden sm:flex w-64 bg-gray-800 p-6 min-h-screen text-white flex-col">
         <div className="mb-4 font-bold text-lg">Templates</div>
@@ -78,24 +78,7 @@ export default function SelectTemplatePage() {
           </button>
         ))}
       </div>
-
-      {/* Botón flotante FUERA de la hoja blanca */}
-      <button
-        className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0 absolute"
-        style={{
-          // Calcula el ancho de la hoja blanca para alinear a la derecha de la tarjeta centrada
-          right: "calc(50vw - 325px)", // 650px/2 = 325px, ajusta si cambiás el ancho de la hoja
-          top: "24px",
-          height: "28px",
-          zIndex: 30
-        }}
-        onClick={handleDownload}
-        type="button"
-      >
-        Descargar PDF
-      </button>
-
-         {/* Preview grande del template */}
+      {/* Preview grande del template */}
       <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full">
         <div className="w-full max-w-3xl flex flex-col gap-2">
           {/* Tarjeta principal con botones adentro */}
@@ -131,3 +114,4 @@ export default function SelectTemplatePage() {
     </main>
   );
 }
+
