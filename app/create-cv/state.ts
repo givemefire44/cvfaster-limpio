@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react";
 
-// Tipos para cada sección
 export type PersonalDetails = {
   firstName: string;
   lastName: string;
@@ -69,7 +68,6 @@ export const initialFormData: CvFormData = {
   languages: [],
 };
 
-// ¡ESTO ES LO QUE FALTABA!
 export function useCvForm() {
   const [formData, setFormData] = useState<CvFormData>(initialFormData);
   const [isHydrated, setIsHydrated] = useState(false);
