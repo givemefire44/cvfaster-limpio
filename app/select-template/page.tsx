@@ -78,11 +78,13 @@ export default function SelectTemplatePage() {
           </button>
         ))}
       </div>
-      {/* Botón flotante fuera de la hoja */}
+
+      {/* Botón flotante FUERA de la hoja blanca */}
       <button
         className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0 absolute"
         style={{
-          right: "calc(50% - 325px)", // 650px/2 de ancho de hoja (ajusta si cambiás el ancho de la hoja)
+          // Calcula el ancho de la hoja blanca para alinear a la derecha de la tarjeta centrada
+          right: "calc(50vw - 325px)", // 650px/2 = 325px, ajusta si cambiás el ancho de la hoja
           top: "24px",
           height: "28px",
           zIndex: 30
@@ -92,6 +94,7 @@ export default function SelectTemplatePage() {
       >
         Descargar PDF
       </button>
+
       {/* Preview grande del template */}
       <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full">
         <div className="w-full max-w-3xl flex flex-col gap-2">
@@ -101,17 +104,15 @@ export default function SelectTemplatePage() {
             ref={previewRef}
           >
             {/* Botón "Volver al editor" dentro de la hoja, arriba izquierda */}
-            <div className="w-full flex flex-row justify-between items-start absolute left-0 top-0 px-4 pt-4 z-10 pointer-events-none">
+            <div className="w-full flex flex-row justify-start items-start absolute left-0 top-0 px-4 pt-4 z-10">
               <button
-                className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0 pointer-events-auto"
+                className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
                 onClick={() => router.push("/create-cv")}
                 type="button"
                 style={{ height: "28px" }}
               >
                 Volver al editor
               </button>
-              {/* Espacio para simetría, el botón azul está fuera */}
-              <div style={{ width: "80px" }} />
             </div>
             {/* Espacio para no tapar el contenido */}
             <div style={{ height: "36px" }} />
