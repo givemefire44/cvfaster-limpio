@@ -96,18 +96,20 @@ export default function SelectTemplatePage() {
       {/* Preview grande del template */}
       <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-12 w-full">
         <div className="w-full max-w-3xl flex flex-col gap-4">
-          <div className="flex flex-row justify-between mb-2 px-4 sm:px-0 pt-4 sm:pt-0">
+          <div className="flex flex-row justify-between mb-1 px-4 sm:px-0 pt-2 sm:pt-0">
             <button
-              className="bg-gray-200 text-gray-800 px-4 py-2 rounded font-semibold shadow hover:bg-gray-300 transition"
+              className="bg-gray-200 text-gray-800 px-4 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-sm min-h-0"
               onClick={() => router.push("/create-cv")}
               type="button"
+              style={{ height: "32px", marginTop: 0 }}
             >
               Volver al editor
             </button>
             <button
-              className="bg-blue-600 text-white px-4 py-2 rounded font-semibold shadow"
+              className="bg-blue-600 text-white px-4 py-1 rounded font-semibold shadow text-sm min-h-0"
               onClick={handleDownload}
               type="button"
+              style={{ height: "32px", marginTop: 0 }}
             >
               Descargar PDF
             </button>
