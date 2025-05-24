@@ -9,19 +9,9 @@ import CVTemplateColumnar from "./templates/CVTemplateColumnar";
 // Si querés más templates, importalos aquí
 
 const templates = [
-  {
-    name: "Base",
-    component: CVTemplateBase,
-  },
-  {
-    name: "Moderno",
-    component: CVTemplateModern,
-  },
-  {
-    name: "Columnar",
-    component: CVTemplateColumnar,
-  },
-  // { name: "OtroTemplate", component: OtroTemplate },
+  { name: "Base", component: CVTemplateBase },
+  { name: "Moderno", component: CVTemplateModern },
+  { name: "Columnar", component: CVTemplateColumnar },
 ];
 
 export default function SelectTemplatePage() {
@@ -33,16 +23,11 @@ export default function SelectTemplatePage() {
   // Descarga PDF usando html2canvas + jsPDF
   const handleDownload = async () => {
     if (!previewRef.current) return;
-
-    // Esperar a que todas las imágenes del preview se carguen
     const images = previewRef.current.querySelectorAll("img");
     await Promise.all(Array.from(images).map(img => {
       if (img.complete) return Promise.resolve();
-      return new Promise(res => {
-        img.onload = img.onerror = res;
-      });
+      return new Promise(res => { img.onload = img.onerror = res; });
     }));
-
     const html2canvasMod = (await import("html2canvas")).default;
     const jsPDFMod = (await import("jspdf")).default;
     const canvas = await html2canvasMod(previewRef.current, { scale: 2 });
@@ -94,26 +79,32 @@ export default function SelectTemplatePage() {
         ))}
       </div>
       {/* Preview grande del template */}
-      <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-12 w-full">
-        <div className="w-full max-w-3xl flex flex-col gap-4">
-          <div className="flex flex-row justify-between mb-1 px-4 sm:px-0 pt-2 sm:pt-0">
+      <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full">
+        <div className="w-full max-w-3xl flex flex-col gap-2 relative">
+          {/* Botones sobre la tarjeta */}
+          <div className="relative w-full">
+            {/* Volver al editor */}
             <button
-              className="bg-gray-200 text-gray-800 px-4 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-sm min-h-0"
+              className="absolute left-0 top-0 bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
               onClick={() => router.push("/create-cv")}
               type="button"
-              style={{ height: "32px", marginTop: 0 }}
+              style={{ height: "28px" }}
             >
               Volver al editor
             </button>
+            {/* Descargar PDF */}
             <button
-              className="bg-blue-600 text-white px-4 py-1 rounded font-semibold shadow text-sm min-h-0"
+              className="absolute right-0 top-0 bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
               onClick={handleDownload}
               type="button"
-              style={{ height: "32px", marginTop: 0 }}
+              style={{ height: "28px" }}
             >
               Descargar PDF
             </button>
+            {/* Espacio para que los botones no tapen la tarjeta */}
+            <div style={{ height: "32px" }} />
           </div>
+          {/* Tarjeta */}
           <div
             className="bg-white rounded-lg shadow-xl p-2 sm:p-8 w-full sm:w-[650px] min-h-[600px] sm:min-h-[900px] flex flex-col items-center"
             ref={previewRef}
