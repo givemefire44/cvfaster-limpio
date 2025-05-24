@@ -11,7 +11,7 @@ export type PersonalDetails = {
   country: string;
   desiredPosition: string;
   profileImage?: string;
-  profile?: string; // <-- AGREGADO AQUÍ
+  profile?: string;
 };
 
 export type Experience = {
@@ -63,7 +63,7 @@ const initialFormData: CvFormData = {
     country: "",
     desiredPosition: "",
     profileImage: "",
-    profile: "", // <-- AGREGADO AQUÍ TAMBIÉN
+    profile: "",
   },
   experience: [],
   education: [],
@@ -74,11 +74,9 @@ const initialFormData: CvFormData = {
 const LOCAL_STORAGE_KEY = "cv-form-data";
 
 export function useCvForm() {
-  // 1. Estado inicial siempre vacío (igual que el server)
   const [formData, setFormData] = useState<CvFormData>(initialFormData);
   const [isHydrated, setIsHydrated] = useState(false);
 
-  // 2. Cuando montó en el cliente, leo localStorage y actualizo estado
   useEffect(() => {
     const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
     if (stored) {
@@ -87,7 +85,6 @@ export function useCvForm() {
     setIsHydrated(true);
   }, []);
 
-  // 3. Cada vez que cambia el estado, lo guardo en localStorage
   useEffect(() => {
     if (isHydrated) {
       localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
@@ -96,6 +93,10 @@ export function useCvForm() {
 
   return {
     formData,
+    setFormData,
+    isHydrated,
+  };
+}
     setFormData,
     isHydrated,
   };
