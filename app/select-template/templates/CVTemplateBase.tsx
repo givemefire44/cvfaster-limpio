@@ -9,26 +9,21 @@ export default function CVTemplateBase({ data }: Props) {
   return (
     <div
       className="
-        bg-white rounded-xl shadow mx-auto
+        cv-page
+        bg-white rounded-xl shadow
+        mx-auto
         p-2 sm:p-8
-        w-full max-w-full
+        w-full
+        max-w-full
         sm:max-w-[210mm]
-        min-h-screen sm:min-h-[297mm]
+        min-h-screen
+        sm:min-h-[297mm]
         box-border
         transition-all
       "
       style={{
-        width: "100%",
-        maxWidth: "100%",
-        minHeight: "100vh",
-        // Desktop A4
-        ...(typeof window !== "undefined" && window.innerWidth >= 640
-          ? {
-              width: "210mm",
-              minHeight: "297mm",
-              maxWidth: "210mm",
-            }
-          : {}),
+        // Para PDF y escritorio: mantiene formato A4 en desktop
+        // En mobile, ocupa todo el ancho disponible sin desbordar
       }}
     >
       {/* Header */}
