@@ -42,7 +42,7 @@ export default function SelectTemplatePage() {
   const TemplateComponent = templates[selectedTemplate].component;
 
   return (
-    <main className="min-h-screen bg-gray-900 flex flex-col sm:flex-row items-start">
+    <main className="min-h-screen bg-gray-900 flex flex-col sm:flex-row items-start relative">
       {/* Sidebar DESKTOP */}
       <aside className="hidden sm:flex w-64 bg-gray-800 p-6 min-h-screen text-white flex-col">
         <div className="mb-4 font-bold text-lg">Templates</div>
@@ -78,32 +78,40 @@ export default function SelectTemplatePage() {
           </button>
         ))}
       </div>
+      {/* Botón flotante fuera de la hoja */}
+      <button
+        className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0 absolute"
+        style={{
+          right: "calc(50% - 325px)", // 650px/2 de ancho de hoja (ajusta si cambiás el ancho de la hoja)
+          top: "24px",
+          height: "28px",
+          zIndex: 30
+        }}
+        onClick={handleDownload}
+        type="button"
+      >
+        Descargar PDF
+      </button>
       {/* Preview grande del template */}
       <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full">
         <div className="w-full max-w-3xl flex flex-col gap-2">
-          {/* Tarjeta principal con botones adentro */}
+          {/* Tarjeta principal */}
           <div
             className="bg-white rounded-lg shadow-xl p-2 sm:p-8 w-full sm:w-[650px] min-h-[600px] sm:min-h-[900px] flex flex-col items-center relative"
             ref={previewRef}
           >
-            {/* Botones dentro de la tarjeta, alineados arriba izquierda y derecha */}
-            <div className="w-full flex flex-row justify-between items-start absolute left-0 top-0 px-4 pt-4 z-10">
+            {/* Botón "Volver al editor" dentro de la hoja, arriba izquierda */}
+            <div className="w-full flex flex-row justify-between items-start absolute left-0 top-0 px-4 pt-4 z-10 pointer-events-none">
               <button
-                className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
+                className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0 pointer-events-auto"
                 onClick={() => router.push("/create-cv")}
                 type="button"
                 style={{ height: "28px" }}
               >
                 Volver al editor
               </button>
-              <button
-                className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
-                onClick={handleDownload}
-                type="button"
-                style={{ height: "28px" }}
-              >
-                Descargar PDF
-              </button>
+              {/* Espacio para simetría, el botón azul está fuera */}
+              <div style={{ width: "80px" }} />
             </div>
             {/* Espacio para no tapar el contenido */}
             <div style={{ height: "36px" }} />
