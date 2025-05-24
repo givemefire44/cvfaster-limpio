@@ -6,7 +6,7 @@ import { useRouter } from "next/navigation";
 import CVTemplateBase from "./templates/CVTemplateBase";
 import CVTemplateModern from "./templates/CVTemplateModern";
 import CVTemplateColumnar from "./templates/CVTemplateColumnar";
-import CVTemplateBarcelona from "./CVTemplateBarcelona";
+import CVTemplateBarcelona from "./templates/CVTemplateBarcelona";
 // Si querés más templates, importalos aquí
 
 const templates = [
