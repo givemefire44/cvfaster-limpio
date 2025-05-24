@@ -81,11 +81,11 @@ export default function SelectTemplatePage() {
         ))}
       </div>
       {/* Preview grande del template */}
-      <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full">
-        <div className="w-full max-w-3xl flex flex-col gap-2">
+      <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full h-full">
+        <div className="w-full h-full flex flex-col gap-2 items-center">
           {/* Tarjeta principal con botones adentro */}
           <div
-            className="bg-white rounded-lg shadow-xl p-2 sm:p-8 w-full sm:w-[650px] min-h-[600px] sm:min-h-[900px] flex flex-col items-center relative"
+            className="relative w-full h-full flex flex-col items-center"
             ref={previewRef}
           >
             {/* Botones dentro de la tarjeta, alineados arriba izquierda y derecha */}
@@ -109,7 +109,9 @@ export default function SelectTemplatePage() {
             </div>
             {/* Espacio para no tapar el contenido */}
             <div style={{ height: "36px" }} />
-            <TemplateComponent data={formData} />
+            <div className="w-full h-full flex items-center justify-center">
+              <TemplateComponent data={formData} />
+            </div>
           </div>
         </div>
       </section>
