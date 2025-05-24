@@ -80,35 +80,33 @@ export default function SelectTemplatePage() {
       </div>
       {/* Preview grande del template */}
       <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full">
-        <div className="w-full max-w-3xl flex flex-col gap-2 relative">
-          {/* Botones sobre la tarjeta */}
-          <div className="relative w-full">
-            {/* Volver al editor */}
-            <button
-              className="absolute left-0 top-0 bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
-              onClick={() => router.push("/create-cv")}
-              type="button"
-              style={{ height: "28px" }}
-            >
-              Volver al editor
-            </button>
-            {/* Descargar PDF */}
-            <button
-              className="absolute right-0 top-0 bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
-              onClick={handleDownload}
-              type="button"
-              style={{ height: "28px" }}
-            >
-              Descargar PDF
-            </button>
-            {/* Espacio para que los botones no tapen la tarjeta */}
-            <div style={{ height: "32px" }} />
-          </div>
-          {/* Tarjeta */}
+        <div className="w-full max-w-3xl flex flex-col gap-2">
+          {/* Tarjeta principal con botones adentro */}
           <div
-            className="bg-white rounded-lg shadow-xl p-2 sm:p-8 w-full sm:w-[650px] min-h-[600px] sm:min-h-[900px] flex flex-col items-center"
+            className="bg-white rounded-lg shadow-xl p-2 sm:p-8 w-full sm:w-[650px] min-h-[600px] sm:min-h-[900px] flex flex-col items-center relative"
             ref={previewRef}
           >
+            {/* Botones dentro de la tarjeta, alineados arriba izquierda y derecha */}
+            <div className="w-full flex flex-row justify-between items-start absolute left-0 top-0 px-4 pt-4 z-10">
+              <button
+                className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
+                onClick={() => router.push("/create-cv")}
+                type="button"
+                style={{ height: "28px" }}
+              >
+                Volver al editor
+              </button>
+              <button
+                className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
+                onClick={handleDownload}
+                type="button"
+                style={{ height: "28px" }}
+              >
+                Descargar PDF
+              </button>
+            </div>
+            {/* Espacio para no tapar el contenido */}
+            <div style={{ height: "36px" }} />
             <TemplateComponent data={formData} />
           </div>
         </div>
