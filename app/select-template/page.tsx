@@ -7,7 +7,6 @@ import CVTemplateBase from "./templates/CVTemplateBase";
 import CVTemplateModern from "./templates/CVTemplateModern";
 import CVTemplateColumnar from "./templates/CVTemplateColumnar";
 import CVTemplateBarcelona from "./templates/CVTemplateBarcelona";
-// Si querés más templates, importalos aquí
 
 const templates = [
   { name: "Base", component: CVTemplateBase },
@@ -80,35 +79,34 @@ export default function SelectTemplatePage() {
           </button>
         ))}
       </div>
+      {/* Botones SIEMPRE arriba y en los extremos */}
+      <div className="w-full flex flex-row justify-between items-center px-8 pt-8 sticky top-0 z-20 bg-gray-900"
+        style={{ minHeight: 40 }}
+      >
+        <button
+          className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
+          onClick={() => router.push("/create-cv")}
+          type="button"
+        >
+          Volver al editor
+        </button>
+        <button
+          className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
+          onClick={handleDownload}
+          type="button"
+        >
+          Descargar PDF
+        </button>
+      </div>
       {/* Preview grande del template */}
       <section className="flex-1 flex flex-col items-center justify-start p-0 sm:p-6 w-full h-full">
         <div className="w-full h-full flex flex-col gap-2 items-center">
-          {/* Tarjeta principal con botones adentro */}
           <div
             className="relative w-full h-full flex flex-col items-center"
             ref={previewRef}
           >
-            {/* Botones dentro de la tarjeta, alineados arriba izquierda y derecha */}
-            <div className="w-full flex flex-row justify-between items-start absolute left-0 top-0 px-4 pt-4 z-10">
-              <button
-                className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
-                onClick={() => router.push("/create-cv")}
-                type="button"
-                style={{ height: "28px" }}
-              >
-                Volver al editor
-              </button>
-              <button
-                className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
-                onClick={handleDownload}
-                type="button"
-                style={{ height: "28px" }}
-              >
-                Descargar PDF
-              </button>
-            </div>
-            {/* Espacio para no tapar el contenido */}
-            <div style={{ height: "36px" }} />
+            {/* Espacio arriba para que los botones sticky no tapen el contenido */}
+            <div style={{ height: "48px" }} />
             <div className="w-full h-full flex items-center justify-center">
               <TemplateComponent data={formData} />
             </div>
