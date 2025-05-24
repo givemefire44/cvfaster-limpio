@@ -38,8 +38,8 @@ export default function SelectTemplatePage() {
   const TemplateComponent = templates[selectedTemplate].component;
 
   return (
-    <main className="min-h-screen bg-gray-900 flex flex-row">
-      {/* Sidebar */}
+    <main className="min-h-screen bg-gray-900 flex flex-col sm:flex-row">
+      {/* Sidebar SOLO desktop */}
       <aside className="hidden sm:flex w-64 bg-gray-800 p-6 min-h-screen text-white flex-col">
         <div className="mb-4 font-bold text-lg">Templates</div>
         <div className="flex flex-col gap-4">
@@ -77,26 +77,26 @@ export default function SelectTemplatePage() {
       {/* Área principal: botones y preview centrados */}
       <div className="flex-1 flex flex-col">
         {/* Botones siempre arriba y extremos */}
-        <div className="w-full flex flex-row justify-between items-center px-8 pt-8 sticky top-0 z-20 bg-gray-900" style={{ minHeight: 40 }}>
+        <div className="w-full flex flex-row justify-between items-center px-2 sm:px-8 pt-2 sm:pt-8 sticky top-0 z-20 bg-gray-900" style={{ minHeight: 40 }}>
           <button
-            className="bg-gray-200 text-gray-800 px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
+            className="bg-gray-200 text-gray-800 px-2 sm:px-3 py-1 rounded font-semibold shadow hover:bg-gray-300 transition text-xs min-h-0"
             onClick={() => router.push("/create-cv")}
             type="button"
           >
             Volver al editor
           </button>
           <button
-            className="bg-blue-600 text-white px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
+            className="bg-blue-600 text-white px-2 sm:px-3 py-1 rounded font-semibold shadow text-xs min-h-0"
             onClick={handleDownload}
             type="button"
           >
             Descargar PDF
           </button>
         </div>
-        {/* Preview grande del template: SIEMPRE centrado */}
-        <div className="flex-1 flex justify-center items-start py-8 overflow-auto">
+        {/* Preview grande del template: SIEMPRE centrado y responsive */}
+        <div className="flex-1 flex justify-center items-start py-2 sm:py-8 overflow-auto">
           <div
-            className="w-full max-w-4xl"
+            className="w-full"
             ref={previewRef}
           >
             <TemplateComponent data={formData} />
