@@ -1,6 +1,41 @@
 import { useState, useEffect } from "react";
 
-// ...tus tipos aquí...
+// Tipos para cada sección
+export type PersonalDetails = {
+  firstName: string;
+  lastName: string;
+  email: string;
+  address: string;
+  city: string;
+  phone: string;
+  country: string;
+  desiredPosition: string;
+  profileImage?: string;
+  profile?: string;
+};
+
+export type Experience = {
+  company: string;
+  position: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  city: string;
+};
+
+export type Education = {
+  institution: string;
+  degree: string;
+  startDate: string;
+  endDate: string;
+  description: string;
+  city: string;
+};
+
+export type Skill = {
+  name: string;
+  level: string;
+};
 
 export type Language = {
   name: string;
@@ -15,7 +50,7 @@ export type CvFormData = {
   languages: Language[];
 };
 
-const initialFormData: CvFormData = {
+export const initialFormData: CvFormData = {
   personal: {
     firstName: "",
     lastName: "",
@@ -34,6 +69,7 @@ const initialFormData: CvFormData = {
   languages: [],
 };
 
+// ¡ESTO ES LO QUE FALTABA!
 export function useCvForm() {
   const [formData, setFormData] = useState<CvFormData>(initialFormData);
   const [isHydrated, setIsHydrated] = useState(false);
