@@ -1,17 +1,14 @@
+
 "use client";
-import { useEffect, useState, useRef } from "react";
+import { useState, useRef } from "react";
 import { useCvForm } from "../create-cv/state";
 import { useRouter } from "next/navigation";
 
 import CVTemplateBase from "./templates/CVTemplateBase";
-import CVTemplateModern from "./templates/CVTemplateModern";
-import CVTemplateColumnar from "./templates/CVTemplateColumnar";
 import CVTemplateBarcelona from "./templates/CVTemplateBarcelona";
 
 const templates = [
   { name: "Base", component: CVTemplateBase },
-  { name: "Moderno", component: CVTemplateModern },
-  { name: "Columnar", component: CVTemplateColumnar },
   { name: "Barcelona", component: CVTemplateBarcelona },
 ];
 
@@ -21,7 +18,6 @@ export default function SelectTemplatePage() {
   const previewRef = useRef<HTMLDivElement | null>(null);
   const router = useRouter();
 
-  // Descarga PDF usando html2canvas + jsPDF
   const handleDownload = async () => {
     if (!previewRef.current) return;
     const images = previewRef.current.querySelectorAll("img");
@@ -43,8 +39,8 @@ export default function SelectTemplatePage() {
   const TemplateComponent = templates[selectedTemplate].component;
 
   return (
-    <main className="min-h-screen bg-gray-900 flex flex-col sm:flex-row items-start">
-      {/* Sidebar DESKTOP */}
+    <main className="min-h-screen bg-gray-900 flex flex-col sm:flex-row">
+      {/* Sidebar */}
       <aside className="hidden sm:flex w-64 bg-gray-800 p-6 min-h-screen text-white flex-col">
         <div className="mb-4 font-bold text-lg">Templates</div>
         <div className="flex flex-col gap-4">
@@ -79,7 +75,7 @@ export default function SelectTemplatePage() {
           </button>
         ))}
       </div>
-      {/* Botones SIEMPRE arriba y en los extremos */}
+      {/* Botones siempre arriba y extremos */}
       <div className="w-full flex flex-row justify-between items-center px-8 pt-8 sticky top-0 z-20 bg-gray-900"
         style={{ minHeight: 40 }}
       >
@@ -116,4 +112,3 @@ export default function SelectTemplatePage() {
     </main>
   );
 }
-
