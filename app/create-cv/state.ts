@@ -1,3 +1,6 @@
+import { useState, useEffect } from "react";
+
+// Tipos para cada sección
 export type PersonalDetails = {
   firstName: string;
   lastName: string;
@@ -44,14 +47,10 @@ export type CvFormData = {
   experience: Experience[];
   education: Education[];
   skills: Skill[];
-  languages: Language[]; // <-- DEBE ESTAR AQUÍ
-  // Si quieres usar tools, about, other, agrégalos aquí también:
-  // tools?: { name: string }[];
-  // about?: string;
-  // other?: { [key: string]: any };
+  languages: Language[];
 };
 
-export const initialFormData: CvFormData = {
+const initialFormData: CvFormData = {
   personal: {
     firstName: "",
     lastName: "",
@@ -67,9 +66,32 @@ export const initialFormData: CvFormData = {
   experience: [],
   education: [],
   skills: [],
-  languages: [], // <-- DEBE ESTAR AQUÍ TAMBIÉN
-  // tools: [],
-  // about: "",
-  // other: {},
+  languages: [],
 };
 
+const LOCAL_STORAGE_KEY = "cv-form-data";
+
+export function useCvForm() {
+  const [formData, setFormData] = useState<CvFormData>(initialFormData);
+  const [isHydrated, setIsHydrated] = useState(false);
+
+  useEffect(() => {
+    const stored = localStorage.getItem(LOCAL_STORAGE_KEY);
+    if (stored) {
+      setFormData(JSON.parse(stored));
+    }
+    setIsHydrated(true);
+  }, []);
+
+  useEffect(() => {
+    if (isHydrated) {
+      localStorage.setItem(LOCAL_STORAGE_KEY, JSON.stringify(formData));
+    }
+  }, [formData, isHydrated]);
+
+  return {
+    formData,
+    setFormData,
+    isHydrated,
+  };
+}
