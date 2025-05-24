@@ -6,7 +6,7 @@ type Props = {
 };
 
 export default function CVTemplateBarcelona({ data }: Props) {
-  // Solo los que existen en CvFormData:
+  // Solo desestructuramos las propiedades que existen en CvFormData:
   const { personal, experience, education, skills, languages } = data;
 
   return (
@@ -44,14 +44,6 @@ export default function CVTemplateBarcelona({ data }: Props) {
             </ul>
           </section>
 
-          {/* Información */}
-          {/* Si tienes 'other' en tu tipo, repón esta sección. 
-              Si no, puedes comentarla o eliminarla para evitar más errores */}
-
-          {/* Herramientas */}
-          {/* Si tienes 'tools' en tu tipo, repón esta sección.
-              Si no, puedes comentarla o eliminarla */}
-
           {/* Idiomas */}
           {languages && languages.length > 0 && (
             <section>
@@ -67,10 +59,6 @@ export default function CVTemplateBarcelona({ data }: Props) {
 
         {/* Columna Principal */}
         <main className="flex-1 flex flex-col p-8 gap-8">
-          {/* Sobre Mí */}
-          {/* Si tienes 'about' en tu tipo, repón esta sección.
-              Si no, puedes comentarla o eliminarla */}
-
           {/* Experiencia Laboral */}
           <section>
             <h2 className="font-bold text-xl text-blue-900 mb-2 flex items-center gap-2">
